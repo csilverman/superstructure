@@ -1,0 +1,18 @@
+.u-NavSite__level--1 {
+	a {
+		@extend .sans-serif-xcondensed;
+
+		font-size: 1.4em;
+		letter-spacing: 0.04em;
+		text-transform: uppercase;
+	}
+}
+.u-NavSite__secondary {
+	.u-NavSite__level--3 {
+		font-size: 0.86em;
+		
+		.active {
+			font-weight: bold;
+		}
+	}
+}

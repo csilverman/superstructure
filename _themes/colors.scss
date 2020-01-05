@@ -1,0 +1,126 @@
+/*	This file doesn't do anything except bind variables to specific elements on the page. The actual colors are set in the palette files.
+
+*/
+
+@mixin custom-link-var($desc) {
+	& {
+		background: var(--#{$desc}-link-bg, var(--link-bg));
+		color: var(--#{$desc}-link-color, var(--link));
+//		text-decoration: none;
+
+		&:hover,
+		&:visited:hover {
+			background: var(--#{$desc}-link-bg-hover, var(--link-bg-hover));
+			color: var(--#{$desc}-link-color-hover, var(--link-hover));
+			text-shadow: var(--#{$desc}-link-glow);
+		}
+	}
+}
+
+html {
+	&.home {
+		background: var(--home-bg, var(--site-bg));
+		border-top: var(--home-top-border, var(--site-top-border));
+	}
+	
+	color: var(--site-text-color);	
+	
+	h1 {
+		color: var(--site-masthead-color);
+		-webkit-text-stroke: var(--site-masthead-textstroke);
+	}
+	
+	.button {
+		transition: 0.4s all ease;
+
+		@include custom-link-var("mod-button");
+	}
+	
+	a {
+		color: var(--link);
+		transition: 0.4s all ease;
+		
+		&:hover {
+			&, &:visited {
+				color: var(--link-hover);				
+			}
+		}
+	}
+	.u-lHeader {
+		h1 {
+			color: var(--masthead-color);
+		}
+	}
+	.u-NavSite__main a {
+		@include custom-link-var("site-nav");
+		text-decoration: none;
+	}
+	.schedule__item {		
+		.module__title {
+			a {
+				@include custom-link-var("sched-item-title");
+			}
+		}
+		&.mainstage {
+			background: var(--sched-mainstage-bg);
+		}
+		&.workshops {
+			background: var(--sched-workshops-bg);
+		}
+	}	
+	
+	.row--facts {
+		background: var(--row-facts-bg);
+		color: var(--row-facts-color);
+
+		.row__title {
+			color: var(--row-facts-title-color, var(--row-facts-color));
+		}
+	}
+	.row--schedule {
+		background: var(--row-schedule-bg);
+		color: var(--row-schedule-color);
+
+		.row__title {
+			color: var(--row-schedule-title-color, var(--row-schedule-color));
+		}
+		.module__title {
+			color: var(--row-schedule-modtitle-color, var(--row-schedule-title-color));			
+		}
+	}
+	.row--people {
+		background: var(--row-people-bg);
+		color: var(--row-people-color);
+
+		.row__title {
+			color: var(--row-people-title-color, var(--row-people-color));
+		}
+	}
+
+
+
+	.u-lFooter {
+		background: var(--footer-bg);
+		color: var(--footer-color);
+
+		@include custom-link-var("footer");
+	}
+
+
+	.u-NavSite__secondary {
+		.u-NavSite__level--2 > .active {
+			& > a {
+				background: var(--subnav-active-bg, #000);
+				color: var(--subnav-active-color, #fff);
+			}
+		}
+		.u-NavSite__level--3 > .active {
+			& > a {
+				background: var(--subsubnav-active-bg, #000);
+				color: var(--subsubnav-active-color, #fff);
+			}
+		}
+	}
+
+
+}

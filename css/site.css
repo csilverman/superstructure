@@ -1,0 +1,208 @@
+@import url("https://use.typekit.net/jya0fox.css");
+:root {
+  --sans-serif: "acumin-pro";
+  --sans-serif-condensed: "acumin-pro-condensed";
+  --sans-serif-xcondensed: "acumin-pro-extra-condensed"; }
+  :root {
+    font-family: var(--sans-serif); }
+
+b {
+  font-weight: normal; }
+
+@media screen and (min-width: 30em) {
+  font-size: calc(1em + 0.5 * ((100vw - 20em) / 60)); }
+
+@media screen and (min-width: 70em) {
+  font-size: calc(0.8em + 0.5 * ((100vw - 20em) / 60)); }
+
+.sans-serif, .sans-serif-xsmall, .sans-serif-small, .sans-serif-normal, .sans-serif-weight-100, .sans-serif-large, .sans-serif-xxxlarge {
+  font-family: var(--sans-serif); }
+  .sans-serif-xsmall {
+    font-size: 0.8em; }
+  .sans-serif-small {
+    font-size: 0.9em; }
+  .sans-serif-normal {
+    font-size: 1.1em; }
+  .sans-serif-weight-100 {
+    font-weight: 100; }
+  .sans-serif-large {
+    font-size: 2em; }
+  .sans-serif-xxxlarge {
+    font-size: 4em; }
+  .sans-serif-condensed {
+    font-family: var(--sans-serif-condensed); }
+  .sans-serif-xcondensed, .u-NavSite__level--1 a {
+    font-family: var(--sans-serif-xcondensed); }
+
+.u-NavSite__level--1 a {
+  font-size: 1.4em;
+  letter-spacing: 0.04em;
+  text-transform: uppercase; }
+
+.u-NavSite__secondary .u-NavSite__level--3 {
+  font-size: 0.86em; }
+  .u-NavSite__secondary .u-NavSite__level--3 .active {
+    font-weight: bold; }
+
+/*	Basics is for pervasive rules that should apply everywhere. These are more fundamental and generic than helpers - they apply to all layouts. This could be a single page, but I'm setting it up as a folder in case anyone would want to include stuff like reset/normalize stylesheets.
+	
+	Couple of ideas here from https://every-layout.dev/
+
+
+*/
+html {
+  box-sizing: border-box; }
+
+*, *:before, *:after {
+  box-sizing: inherit; }
+
+*:only-child {
+  margin-top: 0; }
+
+.margin-0 {
+  margin: 0; }
+
+.breakout,
+.width-fullscreen {
+  left: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+  max-width: none;
+  right: 50%;
+  position: relative;
+  width: 100vw; }
+
+/* */
+.cols-3-lg {
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 2em; }
+
+.grid {
+  display: grid; }
+
+.u-pageInner .PageContentInner {
+  display: grid;
+  grid-template-columns: 25% 75%;
+  grid-template-rows: auto auto auto;
+  grid-template-areas: "masthead nav-top" "nav-secondary content" "footer footer"; }
+
+.u-pageInner .u-lHeader {
+  align-items: center;
+  display: flex;
+  grid-area: masthead;
+  justify-content: center;
+  justify-content: left;
+  padding-left: 1.8em; }
+
+.u-pageInner .u-lContent {
+  max-width: 34em; }
+
+.u-pageInner .u-NavSite__main {
+  grid-area: nav-top;
+  line-height: 1.4;
+  padding-right: 1.4em;
+  text-align: right; }
+
+.u-pageInner .u-NavSite__level--1 {
+  float: right;
+  width: 70%; }
+
+.u-pageInner .u-NavSite__secondary {
+  grid-area: nav-secondary; }
+  .u-pageInner .u-NavSite__secondary .u-NavSite__level--2 {
+    margin: 5em 4em 0 0;
+    padding: 0; }
+  .u-pageInner .u-NavSite__secondary li {
+    list-style: none;
+    margin: 0;
+    padding: 0; }
+    .u-pageInner .u-NavSite__secondary li a {
+      text-decoration: none;
+      padding-left: 1.4em; }
+
+.u-pageInner .u-lMain {
+  grid-area: content; }
+
+.u-pageInner .u-lFooter {
+  grid-area: footer; }
+
+/*	This file doesn't do anything except bind variables to specific elements on the page. The actual colors are set in the palette files.
+
+*/
+html {
+  color: var(--site-text-color); }
+  html.home {
+    background: var(--home-bg, var(--site-bg));
+    border-top: var(--home-top-border, var(--site-top-border)); }
+  html h1 {
+    color: var(--site-masthead-color);
+    -webkit-text-stroke: var(--site-masthead-textstroke); }
+  html .button {
+    transition: 0.4s all ease; }
+    html .button {
+      background: var(--mod-button-link-bg, var(--link-bg));
+      color: var(--mod-button-link-color, var(--link)); }
+      html .button:hover, html .button:visited:hover {
+        background: var(--mod-button-link-bg-hover, var(--link-bg-hover));
+        color: var(--mod-button-link-color-hover, var(--link-hover));
+        text-shadow: var(--mod-button-link-glow); }
+  html a {
+    color: var(--link);
+    transition: 0.4s all ease; }
+    html a:hover, html a:hover:visited {
+      color: var(--link-hover); }
+  html .u-lHeader h1 {
+    color: var(--masthead-color); }
+  html .u-NavSite__main a {
+    text-decoration: none; }
+    html .u-NavSite__main a {
+      background: var(--site-nav-link-bg, var(--link-bg));
+      color: var(--site-nav-link-color, var(--link)); }
+      html .u-NavSite__main a:hover, html .u-NavSite__main a:visited:hover {
+        background: var(--site-nav-link-bg-hover, var(--link-bg-hover));
+        color: var(--site-nav-link-color-hover, var(--link-hover));
+        text-shadow: var(--site-nav-link-glow); }
+  html .schedule__item .module__title a {
+    background: var(--sched-item-title-link-bg, var(--link-bg));
+    color: var(--sched-item-title-link-color, var(--link)); }
+    html .schedule__item .module__title a:hover, html .schedule__item .module__title a:visited:hover {
+      background: var(--sched-item-title-link-bg-hover, var(--link-bg-hover));
+      color: var(--sched-item-title-link-color-hover, var(--link-hover));
+      text-shadow: var(--sched-item-title-link-glow); }
+  html .schedule__item.mainstage {
+    background: var(--sched-mainstage-bg); }
+  html .schedule__item.workshops {
+    background: var(--sched-workshops-bg); }
+  html .row--facts {
+    background: var(--row-facts-bg);
+    color: var(--row-facts-color); }
+    html .row--facts .row__title {
+      color: var(--row-facts-title-color, var(--row-facts-color)); }
+  html .row--schedule {
+    background: var(--row-schedule-bg);
+    color: var(--row-schedule-color); }
+    html .row--schedule .row__title {
+      color: var(--row-schedule-title-color, var(--row-schedule-color)); }
+    html .row--schedule .module__title {
+      color: var(--row-schedule-modtitle-color, var(--row-schedule-title-color)); }
+  html .row--people {
+    background: var(--row-people-bg);
+    color: var(--row-people-color); }
+    html .row--people .row__title {
+      color: var(--row-people-title-color, var(--row-people-color)); }
+  html .u-lFooter {
+    background: var(--footer-bg);
+    color: var(--footer-color); }
+    html .u-lFooter {
+      background: var(--footer-link-bg, var(--link-bg));
+      color: var(--footer-link-color, var(--link)); }
+      html .u-lFooter:hover, html .u-lFooter:visited:hover {
+        background: var(--footer-link-bg-hover, var(--link-bg-hover));
+        color: var(--footer-link-color-hover, var(--link-hover));
+        text-shadow: var(--footer-link-glow); }
+  html .u-NavSite__secondary .u-NavSite__level--2 > .active > a {
+    background: var(--subnav-active-bg, #000);
+    color: var(--subnav-active-color, #fff); }
+  html .u-NavSite__secondary .u-NavSite__level--3 > .active > a {
+    background: var(--subsubnav-active-bg, #000);
+    color: var(--subsubnav-active-color, #fff); }
