@@ -1,0 +1,28 @@
+$font-styles: (
+	serif: (
+		font-family: "baskerville-urw",
+
+		small: (
+			font-size: (1em, 1em),
+		),
+	),
+	sans-serif: (
+		font-family: "acumin-pro",
+	
+		xsmall: (
+			font-size: (1em, 0.7em),
+			font-weight: normal,
+		),
+		small: (
+			font-size: (1em, 0.9em),
+		),
+		small-condensed: (
+			use: small,
+			line-height: 1.26,
+		),
+		regular: (
+			font-size: (1.2em, 1.1em, 1.1em, 1em),
+		),
+	),
+);
+

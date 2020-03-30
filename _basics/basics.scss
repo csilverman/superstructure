@@ -6,13 +6,19 @@
 
 */
 
+body {
+	margin: 0;
+}
 html {
   box-sizing: border-box;
 }
 *, *:before, *:after {
   box-sizing: inherit;
 }
-
-*:only-child {
+*:only-child,
+*:first-child {
     margin-top: 0;
+}
+img {
+	width: 100%;
 }
