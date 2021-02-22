@@ -1,0 +1,17 @@
+.sticky {
+    display: block !important;
+    text-align: center;
+    max-width: 30em;
+    margin: 0 auto 6em auto !important;
+
+	.post__header {
+	    display: none;
+	}
+	& > b {
+	    display: none;
+	}
+	p {
+	    font-family: IBMPlexSerif-Light !important;
+	    font-size: 0.9em !important;
+	}
+}

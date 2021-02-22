@@ -1,0 +1,7 @@
+.prevnext__title {
+	@include font(monospace, small);
+	text-transform: uppercase;
+}
+.prevnext__name {
+	@include font(condensedHeader, xlarge);	
+}

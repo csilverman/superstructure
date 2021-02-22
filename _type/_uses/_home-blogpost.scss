@@ -1,0 +1,37 @@
+.home {
+	.post {
+		.entry__summary {
+			p {
+				@include font(serifDisplay, medium condensed);
+			}
+		}
+		.post__title {
+			@include font(condensedHeader, xxlarge);
+			font-weight: normal;
+		}
+		.label,
+		.post__date {
+			@include font(monospace, xxsmall);
+		}
+		.post__categories,
+		.post__tags {
+			a {
+				@include font(monospace, xxsmall);
+			}
+		}		
+	}
+}
+
+.archive {
+	.post__title {
+		@include font(monospace, medium);		
+	}
+	.post__date {
+		@include font(monospace, xxsmall);
+	}
+	.entry__summary {
+		p {
+			@include font(serif, small condensed);
+		}
+	}
+}

@@ -1,0 +1,26 @@
+.archive {
+
+	.post {
+	    display: flex;
+	    flex-flow: column;
+	    border-bottom: 1px dashed #00f;
+	    padding-bottom: 2em;
+	    margin-bottom: 2em;
+	}
+	.post__catContainer,
+	.post__tagsContainer {
+		display: none;
+	}
+	.post__header {
+	    order: 2;
+	}
+	.post__dateContainer {
+	    order: 1;
+	}
+	.entry__summary {
+	    order: 3;
+	}
+	.entry__summary p {
+	    margin-bottom: 0;
+	}
+}

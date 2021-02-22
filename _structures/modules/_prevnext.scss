@@ -1,0 +1,22 @@
+.postNav__container {
+	text-align: center;
+	
+	.pagingNav__navItem {
+		b {
+		    display: block;
+		}
+	}
+	
+	@include break(medium) {
+		display: flex;
+		flex-direction: row;
+		text-align: unset;
+
+		.pagingNav__navItem {
+			width: 50%;
+		}
+		.postNav__next {
+			text-align: right;
+		}
+	}
+}

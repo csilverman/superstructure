@@ -1,0 +1,54 @@
+.home {
+	.post__edit {
+		display: none;
+	}
+	.post {
+		@include break('small') {
+			display: grid;
+			/*
+			grid-template-rows: auto 1fr;
+			grid-template-columns: auto 1fr;
+			grid-template-areas: 
+				"post-meta post-title"
+				"post-meta post-content"
+			;
+			*/
+
+			grid-template-rows: auto 1fr auto;
+			grid-template-columns: auto 1fr;
+			grid-template-areas: 
+				"post-date post-title"
+				"post-category post-title"
+				"post-tags post-content"
+			;
+
+			grid-column-gap: 3em;
+			margin-bottom: 3em;
+		}
+		.post__title {
+			margin-bottom: 0.2em;
+		}
+		.post__date {
+			grid-area: post-date;
+		}
+		.post__catContainer {
+			grid-area: post-category;
+		}
+		.post__tagsContainer {
+			grid-area: post-tags;
+		}
+		.post__header {
+			grid-area: post-title;
+		}
+		.post__meta {
+			grid-area: post-meta;
+		}
+		.entry__summary {
+			grid-area: post-content;
+		}
+		.post__categories,
+		.post__tags {
+			@extend ._clean-list;
+		}
+	}
+}

@@ -1,0 +1,311 @@
+
+
+/*	LINK EFFECTS
+
+Effects:
+- wipe up
+- wipe left
+	- invert-text
+
+*/
+
+
+
+
+:root {
+	--highlight-color: #f00;
+	--highlight-height: 40%;
+	--link-bg: transparent;
+}
+
+
+
+.linkMask {
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+
+	//	fallback color in case the webkit stuff isn't recognized
+	color: #f0f;
+}
+
+.entry__summary {
+	p {
+		color: #313746;
+	}
+}
+
+.post__tags {
+	li {
+		a {
+			--highlight-color: #000;
+			--highlight-height: 100%;
+			--link-bg: #aaa;
+			
+			@extend .linkMask;
+			
+			&:hover {
+				-webkit-text-fill-color: transparent;
+				color: transparent !important;
+			}
+		}
+	}
+}
+
+/*
+	On return:
+	- Turn the background-size and background-position settings into variables
+	- do effects like wipe-up-melt and wipe-up-melt-bounce by adjusting the variables, not
+		the actual CSS.
+	
+	The idea is that all these styles would have the same basic code. Effects like wipe-up-melt etc
+	would be accomplished through collections of CSS variables.
+
+	Or: have mixins that you can pass settings to. That might be easier. And the mixin generates the code,
+	which would be easier to deal with/more extensible than having one swiss-army-knife mixin that manages a bunch of
+	different configurations and tries to do everything.
+
+
+	Idea: linkEffect comes with presets that are parameters. so wipe-up-melt would specify certain parameters to achieve that effect; you wouldn't have to set the numbers specifically. However, the numbers would be set via CSS vars, so you could override those values if you wanted to have a manually set effect.
+
+*/
+
+
+@mixin linkEffect-highlighter($map:(item: 1)) {
+
+	//	The "highlighter" effect involves a colored background being
+	//	animated across the link in various ways.
+	
+	//	highlightColor - the color of the bar/background that appears on hover
+	//	highlightHeight - the vertical percentage of the line occupied by the hover bg
+	//		(this could vary depending on whether you're wipng up or wiping right)
+	//	linkBackgroundColor - this is the background color of the link before the hover state.
+	//	linkBackgroundGradient - if you want to have a gradient as the link background, use this
+	
+	//	hoverBgShiftsUp - if you want the hover background to shift up slightly, set this to true
+	//		By default, the background will shift up 10% of the line height
+	//	hoverBgShiftsUpDistance - must be specified as a percentage
+
+	$defaults: (
+		highlightColor: var(--linkEffect-highlight-color, #ff0),
+		highlightHeight: var(--linkEffect-highlight-height, 100%),
+		linkBackgroundColor: var(--linkEffect-link-bg-color, transparent),
+		linkBackgroundGradient: linear-gradient(to right, var(--link-bg) 0%, var(--link-bg) 100%),
+		direction: up, /*right,*/
+		distance: 1em,
+		fill-mode: forwards,
+		duration: 2s,
+		delay: 0,
+		hoverBgShiftsUp: false,
+		hoverBgShiftsUpDistance: var(--linkEffect-hoverBgShiftsUp-distance, 10%),
+	);
+
+	$delay: has-key($map, $defaults, delay);
+	$direction: has-key($map, $defaults, direction);
+	$distance: has-key($map, $defaults, distance);
+	$fill-mode: has-key($map, $defaults, fill-mode);
+	$duration: has-key($map, $defaults, duration);
+	$highlightColor: has-key($map, $defaults, highlightColor);
+	$highlightHeight: has-key($map, $defaults, highlightHeight);
+	$linkBackgroundColor: has-key($map, $defaults, linkBackgroundColor);
+	$linkBackgroundGradient: has-key($map, $defaults, linkBackgroundGradient);
+	$hoverBgShiftsUp: has-key($map, $defaults, hoverBgShiftsUp);
+	$hoverBgShiftsUpDistance: has-key($map, $defaults, hoverBgShiftsUpDistance);
+
+
+	& {
+		background-color: $linkBackgroundColor;
+		
+		//	background direction
+
+		@if $direction == 'right' {
+			background-repeat: no-repeat, repeat-x;
+			background-position: 0px bottom, center bottom;
+			background-size: 0px 100%, 100%;    
+			
+			&:hover {
+				background-size: 100% 100%, 100%;    
+			}
+		}
+		@if $direction == 'up' {
+			background-repeat: no-repeat, repeat-x;
+			background-position: 0 100%, bottom;
+			background-size: 100% 2%;
+
+			&:hover {
+				background-size: 100% 100%;
+				background-position: 0 100%, bottom;
+			}
+		}
+
+		//	special shift-up effect
+		
+		@if $hoverBgShiftsUp {
+			background-image: linear-gradient(to top, transparent 0%, transparent $hoverBgShiftsUpDistance, $highlightColor $hoverBgShiftsUpDistance, $highlightColor $highlightHeight, transparent $highlightHeight, transparent 100%), $linkBackgroundGradient;
+			
+			&:hover {
+				background-size: 100% 200%;
+			}
+		}
+		@else {
+			background-image: linear-gradient(to top, $highlightColor 0%, $highlightColor $highlightHeight, transparent $highlightHeight, transparent 100%), $linkBackgroundGradient;
+		}
+
+
+		position: relative;
+		width: auto;
+		background-repeat: no-repeat, repeat-x;
+		transition: background 0.4s cubic-bezier(0.785, 0.135, 0.15, 0.86) 0s;
+
+	}
+
+}
+
+.post__titleLink {
+//	@extend .link--titleStyle;
+//	@extend .link--wipeUp--melt;
+	
+	@include linkEffect-highlighter();
+
+}
+.entry__summary a {
+	@include linkEffect-highlighter();
+	transition-property: background, text-decoration;
+	
+	&:hover {
+		text-decoration-color: transparent;
+	}
+}
+
+
+
+.link--wipeUp--melt {
+	--highlight-color: #5ef1e5;
+
+	& {
+		background-image: linear-gradient(to top, transparent 0%, transparent 10%, var(--highlight-color) 10%, var(--highlight-color) var(--highlight-height), transparent var(--highlight-height), transparent 100%), linear-gradient(to right, var(--link-bg) 0%, var(--link-bg) 100%);
+		color: #f00;
+		position: relative;
+		width: auto;
+		background-repeat: no-repeat, repeat-x;
+		background-position: 0 100%, bottom;
+		transition: background 0.4s cubic-bezier(0.785, 0.135, 0.15, 0.86) 0s;
+		padding: 0.1% 0px;
+		background-size: 100% 4%;
+	}
+	&:hover {
+		background-size: 100% 200%;
+		background-position: 0 100%, bottom;
+	}
+}
+
+
+.link--wipeUp {
+	& {
+		background-image: linear-gradient(to top, var(--highlight-color) 0%, var(--highlight-color) var(--highlight-height), transparent var(--highlight-height), transparent 100%), linear-gradient(to right, var(--link-bg) 0%, var(--link-bg) 100%);
+		color: #f00;
+		position: relative;
+		width: auto;
+		background-repeat: no-repeat, repeat-x;
+		background-position: 0 100%, bottom;
+		transition: background 0.4s cubic-bezier(0.785, 0.135, 0.15, 0.86) 0s;
+		padding: 0.1% 0px;
+		background-size: 100% 2%;
+	}
+	&:hover {
+		background-size: 100% 400%;
+		background-position: 0 100%, bottom;
+	}
+}
+
+
+.link--titleStyle {
+	//	in this case, the link has an underline that goes
+	//	all the way across, even if the text wraps
+	& {
+		display: block;
+		background-image: linear-gradient(to top, var(--highlight-color) 0%, var(--highlight-color) var(--highlight-height), transparent var(--highlight-height), transparent 100%), linear-gradient(to right, var(--link-bg) 0%, var(--link-bg) 100%);
+		color: #f00;
+		position: relative;
+		width: auto;
+		background-repeat: no-repeat, repeat-x;
+		background-position: 0 100%, bottom;
+		transition: background 0.4s cubic-bezier(0.785, 0.135, 0.15, 0.86) 0s;
+		padding: 0.1% 0px;
+		background-size: 100% 4%;
+	}
+	&:hover {
+		background-size: 100% 400%;
+		background-position: 0 100%, bottom;
+	}
+}
+
+
+.wipeRight,
+.post__tags a {
+	& {
+		background-image: linear-gradient(to top, var(--highlight-color) 0%, var(--highlight-color) var(--highlight-height), transparent var(--highlight-height), transparent 100%), linear-gradient(to right, var(--link-bg) 0%, var(--link-bg) 100%);
+		color: #f00;
+		position: relative;
+		width: auto;
+		background-repeat: no-repeat, repeat-x;
+		background-position: 0px bottom, center bottom;
+		transition: background 0.4s cubic-bezier(0.785, 0.135, 0.15, 0.86) 0s;
+		padding: 0.1% 0px;
+		background-size: 0px 100%, 100%;    
+
+	}
+	&:hover {
+		background-size: 100% 1px;
+		background-size: 100% 100%, 100%;
+	}
+}
+
+
+
+html {
+	background-image: var(--bg);
+
+    background-position: 0 0;
+    background-attachment: fixed;
+    background-size: contain !important;
+
+	body {
+		background: #fff;
+		border-radius: 2.3em;
+	}
+}
+
+.u-Masthead {
+	background: #f00;
+	text-indent: 3em;
+	border-radius: 50%;
+	position: fixed;
+//	top: 2.4em;
+//	left: 2.4em;
+	width: 2em;
+	height: 2em;
+//	overflow: hidden;
+	display: block;
+	
+	&:hover {
+//		color: transparent;
+	}
+
+	.u-Masthead__siteTitle {
+		font-size: 1em;
+	}
+	.u-Masthead__siteTitle__text {
+		font-family: SpaceMono-Regular;
+	}
+	a {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		text-decoration: none;
+	}
+}
+
+
+

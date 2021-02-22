@@ -43,6 +43,7 @@ table {
 }
 img {
 	//	This eliminates that annoying gap under images
+	height: auto;
 	display: block;
 	line-height: 0;
 }

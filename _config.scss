@@ -1,11 +1,39 @@
 @import url("https://use.typekit.net/jya0fox.css");
 
-$small: 30em;
-$medium: 50em;
-$large: 70em;
+/*
+:root {
+	--home-bg: #171d31;	
+}
+*/
 
 $breakpoints: (
-	small: $small,
-	medium: $medium,
-	large: $large,
+	small: 30em,
+	medium: 50em,
+	large: 70em,
 );
+
+$fonts-path: '../fonts';
+
+$s__padding: (
+	normal: (1em),
+	large: (1.2em, 1.4em)
+);
+
+$s__narrow-widths: (
+	quarter: (33%, 25%),
+	third: (50%, 40%),
+	half: (100%, 52%),
+	full: (100%)
+);
+
+$s__wide-widths: (
+	wide: (50em),
+	xwide: (60em)
+);
+
+$s__default-padding: 1.3em;
+$s__fullsize-selector: ".size-full";
+
+
+$s__indent-distance: 2em;
+$s__indent-sizeboost: 2em;

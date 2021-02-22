@@ -1,0 +1,22 @@
+.u-NavSite {
+    position: absolute;
+    top: 2em;
+    right: 2em;
+    
+	li {
+		display: inline;
+	}
+	
+	.icon {
+		display: none;
+	}
+}
+.u-lPageContent {
+	margin: 0 auto;
+	max-width: 40em;
+}
+
+
+.ac-NavAnchor {
+	@extend .ac-hiddenVisually;
+}

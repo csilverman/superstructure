@@ -1,0 +1,15 @@
+h1 {
+	@include font(condensedHeader, xxlarge);
+	font-weight: normal;
+	
+	.subtitle {
+		@include font(monospace, relative-xx-smaller);
+	}
+}
+p {
+	@include font(serif, regular);
+	-webkit-text-stroke: 0.012em #fff;
+}
+li, li p {
+	@include font(serif, regular condensed);	
+}

@@ -1,0 +1,80 @@
+@mixin helper-classes($map, $property) {
+
+	//	This generates a set of simple classes - typically helper classes - from a provided map.
+	
+	//	$map should look like this:
+	
+	//	$narrow-widths: (
+	//		quarter: (33%, 25%),
+	//		third: (50%, 40%),
+	//		half: (100%, 52%),
+	//		full: (100%)
+	//	) !default;
+
+	//	$property is whatever property we're trying to style; say, "width".
+	//	So helper-classes($narrow-widths, width) would generate a series of 
+	//	classes - width-quarter, width-third - with the "width" property set to
+	//	the specified percentages. The values are lists, with each item corresponding
+	//	to the position of a breakpoint defined in the central $breakpoints map, located
+	//	in your _config file.
+	
+  	@each $key, $value in $map {
+		$number-of-breakpoints: length($value);
+		@for $i from 1 through $number-of-breakpoints {
+			@if $i == 1 {
+				.#{$property}-#{$key} {
+					#{$property}: nth($value, $i);
+				}
+			}
+			// if not, wrap it in a media query
+			@else {
+				$the-breakpoint: get-map-value-by-index($breakpoints, $i);
+
+				@media screen and (min-width: $the-breakpoint) {
+					.#{$property}-#{$key} {
+						#{$property}: nth($value, $i);
+					}
+				}
+			}
+		}
+	}
+}
+
+
+
+@mixin wide-widths($map) {
+
+	//	This is identical to helper-classes(), except the values are
+	//	wrapped in a breakout() mixin, which generates CSS to expand an element
+	//	outside the max-width of a containing element. This would be used in situations
+	//	where you wanted to designate a series of widths that would break out of the
+	//	containing element: maybe a pullquote that's only a little wider than the
+	//	container, and a large image that's much wider - maybe even full-bleed.
+	//	I would have liked to work this functionality into helper-classes(), since they're
+	//	so similar, but I don't want to sink a lot of time into eliminating one mixin and
+	//	possibly making things more complicated. I'll think about this in the future.
+
+	@each $key, $value in $map {
+		$number-of-breakpoints: length($value);
+		@for $i from 1 through $number-of-breakpoints {
+			@if $i == 1 {
+				.width-#{$key} {
+					clear: both;
+					@include breakout(nth($value, $i));
+				}
+			}
+			// if not, wrap it in a media query
+			@else {
+				$the-breakpoint: get-map-value-by-index($breakpoints, $i);
+				@media screen and (min-width: $the-breakpoint) {
+					.width-#{$key} {
+						@media screen and (min-width: nth($value, $i)) {
+							@include breakout(nth($value, $i));
+						}
+					}
+				}
+			}
+		}
+	}
+}
+

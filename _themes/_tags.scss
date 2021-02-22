@@ -1,0 +1,9 @@
+.post__tags {
+	a {
+		text-decoration: none;
+		
+		&:before {
+			content: '#';
+		}
+	}
+}

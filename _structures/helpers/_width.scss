@@ -1,0 +1,39 @@
+.breakout,
+.width-fullscreen {
+	left: 50%;
+	margin-left: -50vw;
+	margin-right: -50vw;
+	max-width: none;
+	right: 50%;
+	position: relative;
+	width: 100vw;
+}
+.width-full-screen,
+.size-full.width-full-screen {
+	@include breakout(100vw);
+	width: 100vw !important;
+}
+
+@include helper-classes($s__narrow-widths, 'width');
+@include wide-widths($s__wide-widths);
+
+
+.width-quarter {}
+.width-third {}
+.width-half {}
+.width-full {}
+
+.wp-block-image {
+	&.size-thumbnail {
+		@extend .width-quarter;
+	}	
+	&.size-medium {
+		@extend .width-third;
+	}
+	&.size-large {
+		@extend .width-half;
+	}
+	&.size-full {
+		@extend .width-full;
+	}
+}

@@ -1,0 +1,298 @@
+.u-Masthead {
+
+	background: radial-gradient(ellipse at center, #00f 0%, #00f 10%, #f00 10%, #f00 20%, #0f0 20%, #0f0 30%, #00f 30%, #00f 40%, #f00 40%, #f00 50%, #0f0 50%, #0f0 60%, #00f 60%, #00f 70%, #f00 70%, #f00 80%);
+
+	background-size: var(--hp-badge-bg-size, 100%) var(--hp-badge-bg-size, 100%);
+	background-position: center center;
+	filter: hue-rotate(var(--hue-rotate));
+}
+
+.u-lHeader {
+    height: 3em;
+    position: fixed;
+    top: 2em;
+    left: 2em;
+    width: 3em;
+}
+
+@mixin pieSlices($colors, $hardEdges: false, $softStop: true) {
+	$css: "conic-gradient(";
+	$comma: ", ";
+	$numberOfColors: length($colors);
+	
+	//	subtract one from the length, since I'm zero-indexing
+	$numberOfColors: $numberOfColors - 1;
+	
+	//	and I'm starting at zero because the gradient angle shoule]d start at 0deg.
+	//	Say there are six colors: starting with i as 1 means the first segment 
+	//	would start at 1 * (360/6), or 60deg.
+	
+	@for $i from 0 through $numberOfColors {
+		@if $i == $numberOfColors {
+			$comma: "";
+		}
+
+		@if $hardEdges {
+			$degrees: ($i * (360 / $numberOfColors)) + "deg";
+			$nextSection: "";
+			@if $i < $numberOfColors {
+//				$nextSection: unquote(" " + nth($colors, $i + 1) + " " + $degrees + $comma);
+				$nextSection: unquote(" " + (($i+1) * (360 / $numberOfColors)) + "deg");
+			}
+
+			$css: unquote(
+				$css + " " + nth($colors, $i+1) + " " + $degrees + $nextSection + $comma
+			);
+		} @else {
+			$css: unquote($css + " " + nth($colors, $i+1) + $comma);
+		}
+	}
+	$lastValue: " ";
+	@if $softStop {
+		$lastValue: ", " + nth($colors, 1);
+	}
+
+	$css: unquote($css + $lastValue + ")");
+	background: $css;
+}
+
+@mixin innerCircle($width) {
+	position: absolute;
+	content: "";
+	width: $width;
+	height: $width;
+	background: #f00;
+	border-radius: 50%;
+	top: calc((100% - #{$width}) / 2);
+	left: calc((100% - #{$width}) / 2);
+}
+
+//  comment the code and share it on Twitter and blog
+
+@keyframes spin {
+	100% {
+		transform: rotate(360deg);
+	}
+}
+
+@keyframes spin-cc {
+	100% {
+		transform: rotate(-720deg);
+	}
+}
+
+// @keyframes spin-atom { 100% { transform:rotate(360deg) scaleX(0.66); } }
+
+.u-Masthead__siteTitle {
+	margin: 0;
+}
+.u-lHeader:hover {
+	a {
+		z-index: 1000;
+	    width: 8em;
+		
+		&:hover {
+			.u-Masthead__siteTitle__text {
+				animation: spin-cc 4s linear infinite;					
+			}
+		}
+	}
+}
+.u-Masthead__siteTitle__text {
+	position: relative;
+	display: block;
+}
+
+.u-Masthead {
+	display: block;
+	height: 2em;
+	width: 2em;
+	border-radius: 50%;
+}
+
+	.s1 {
+		position: relative;
+
+		&,
+		&:before,
+		&:after {
+			transition: all ease 0.4s;
+		}
+		.u-lHeader:hover & {
+			animation: spin 4s linear infinite;
+			position: relative;
+
+			background: radial-gradient(
+					ellipse at center,
+					transparent 0%,
+					transparent 23%,
+					#0f0 23%,
+					#0f0 26%,
+					transparent 26%,
+					transparent 46%,
+					#0f0 46%,
+					#0f0 49%,
+					transparent 49%,
+					transparent 100%
+				),
+				conic-gradient(#0f0, #000, #000);
+			background-size: contain;
+		}
+	}
+	.s2 {
+		.u-lHeader:hover & {
+			animation: spin 4s linear infinite;
+			@include pieSlices(
+				#0ff transparent #0ff transparent #0ff transparent #0ff transparent #0ff
+					transparent #0ff transparent #0ff transparent #0ff transparent #0ff,
+				true,
+				false
+			);
+			&:before {
+				mix-blend-mode: multiply;
+				animation: spin-cc 4s linear infinite;
+				@include innerCircle(100%);
+				@include pieSlices(
+					#f00 transparent #f00 transparent #f00 transparent #f00 transparent #f00
+						transparent #f00 transparent #f00 transparent #f00 transparent #f00,
+					true,
+					false
+				);
+			}
+		}
+	}
+
+.s3 {
+	.u-lHeader:hover & {
+		@include pieSlices(
+			#00f #fff #00f #fff #00f #fff #00f #fff #00f #fff #00f #fff #00f #fff #00f
+				#fff,
+			false,
+			true
+		);
+
+		&:before {
+			@include innerCircle(66%);
+			@include pieSlices(
+				#00f #fff #00f #fff #00f #fff #00f #fff #00f #fff #00f #fff #00f #fff #00f
+					#fff,
+				false,
+				true
+			);
+		}
+		&:after {
+			@include innerCircle(33%);
+			@include pieSlices(
+				#00f #fff #00f #fff #00f #fff #00f #fff #00f #fff #00f #fff #00f #fff #00f
+					#fff,
+				false,
+				true
+			);
+		}
+
+		&,
+		&:after {
+			animation: spin 4s linear infinite;
+		}
+		&:before {
+			animation: spin-cc 4s linear infinite;
+		}
+	}
+}
+
+.s4 {
+	.u-lHeader:hover & {
+		@include pieSlices(#f00 #ff0 #0f0 #0ff #00f #f0f, true);
+
+		&:before {
+			@include innerCircle(66%);
+			@include pieSlices(#f00 #ff0 #0f0 #0ff #00f #f0f, true);
+		}
+		&:after {
+			@include innerCircle(33%);
+			@include pieSlices(#f00 #ff0 #0f0 #0ff #00f #f0f, true);
+		}
+
+		&,
+		&:after {
+			animation: spin 4s linear infinite;
+		}
+		&:before {
+			animation: spin-cc 4s linear infinite;
+		}
+	}
+}
+.s5 {
+	&,
+	&:before,
+	&:after {
+		transition: all ease 0.4s;
+	}
+	.u-lHeader:hover & {
+		background: #f00 !important;
+		$width: 0.3;
+		//    transform: scaleX(0.66);
+		width: calc(#{$width} * 4em);
+//		left: calc((4em - (#{$width} * 4em)) / 2);
+
+		&:before,
+		&:after {
+			position: absolute;
+			content: "";
+			height: 100%;
+			width: 100%;
+			background: #f00;
+			border-radius: 50%;
+			background: #0f0;
+			transform: rotate(120deg);
+			mix-blend-mode: color-dodge;
+			top: 0;
+			left: 0;
+		}
+		&:after {
+			background: #00f;
+			transform: rotate(240deg);
+		}
+	}
+	.u-lHeader:hover & {
+		animation: spin 4s linear infinite;
+		&:before {
+			animation: spin-cc 4s linear infinite;
+		}
+	}
+}
+
+.s6 {
+	.u-lHeader:hover & {
+		animation: spin 8s linear infinite;
+		@include pieSlices(
+			#f0f #0ff #f0f #0ff #f0f #0ff #f0f #0ff #f0f #0ff #f0f #0ff #f0f #0ff #f0f
+				#0ff,
+			false,
+			true
+		);
+
+		&:before {
+			mix-blend-mode: multiply;
+			animation: spin-cc 4s linear infinite;
+			@include innerCircle(100%);
+			@include pieSlices(
+				#0ff #f0f #0ff #f0f #0ff #f0f #0ff #f0f #0ff #f0f #0ff #f0f #0ff #f0f #0ff
+					#f0f,
+				false,
+				true
+			);
+		}
+		&:after {
+			mix-blend-mode: color-dodge;
+			animation: spin 8s linear infinite;
+			@include innerCircle(100%);
+			@include pieSlices(
+				#ff0 transparent #ff0 transparent #ff0 transparent #ff0 transparent #ff0
+					transparent #ff0 transparent #ff0 transparent #ff0 transparent,
+				false,
+				true
+			);
+		}
+	}
+}

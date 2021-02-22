@@ -1,0 +1,30 @@
+.post__categories {
+	a {
+	    text-decoration: none;
+	    padding: 0.1em 0.6em;
+	    border-radius: 0.4em;
+	    
+	    &[href$='uncategorized/'] {
+		    background: #f00;
+		}
+	    &[href$='design/'] {
+		    background: #F6EE75;
+		}
+	}
+}
+
+/*
+
+#B9E486
+
+#B1D9FB
+
+#F6EE75
+
+#E5B5F8
+
+#F9DCA9
+
+#D9D8FD
+	
+*/

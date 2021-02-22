@@ -1,0 +1,21 @@
+._clean-list {
+	padding-left: 0;
+	
+	& > li {
+		list-style: none;
+	}
+}
+._clean-list--horizontal {
+	padding-left: 0;
+	
+	& > li {
+		list-style: none;
+		display: inline;
+		margin-left: var(--clean-list-horizontal-itemSpace, 0.8em);
+
+		&:first-child {
+			margin-left: 0;
+		}
+	}
+}
+

@@ -1,72 +1,344 @@
+@import url("https://use.typekit.net/jya0fox.css");
+/*
+:root {
+	--home-bg: #171d31;	
+}
+*/
+html {
+  box-sizing: border-box;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+/*	UTILITIES
+	=========
+
+	These provide useful functions for writing your own mixins, as well as mixins for automating certain processes (generating responsive CSS from a map, for example). They're also used by mixins in Beltpack itself, so they should come first.
+*/
+/*
+	As far as I can tell, there doesn't seem to be a function to get a key-value pair from a map based on index number. This might be clumsy, but it works: iterate across the map, incrementing a counter, until the counter matches the specified index, at which point you return the value.
+
+*/
+/*	FUNCTIONS
+	========= */
+/*	The following are by Hugo Giraudel
+*/
+/*	MIXINS
+	====== */
+/*	AESTHETIC
+	=========
+
+	These mixins handle aesthetic effects.
+*/
+/*	Animations
+	========== */
+/*	Utilities
+	---------
+	Couple of tools for applying animations.
+
+*/
+/*
+	STRUCTURE
+	=========	
+
+	This contains mixins that might be useful for layout stuff.	
+*/
+/*
+
+	NOTE
+	Compiling this file will throw an error, even though compiling files
+	that refer to it will not throw errors.
+
+	Still looking into this, but it's fine.	
+
+	THIS SHOULD BE BUILT ON TOP OF BELTPACK. This includes a break() mixin without
+	the second parameter, and that's blocking the more advanced break() mixin in Beltpack.
+	Go through this and remove everything that's already in Beltpack.
+
+*/
+/* ---- */
 /*	Debug
 	=====
 
 	This is a collection of tools and mixins that will help with development. I'm keeping it separate from the main mixins file because this is stuff that shouldn't get mixed up in the final site. Ensuring that this doesn't go live should be as simple as commenting out the debug @import.
 */
-@import url("https://use.typekit.net/jya0fox.css");
-:root {
-  --sans-serif: "acumin-pro";
-  --sans-serif-condensed: "acumin-pro-condensed";
-  --sans-serif-xcondensed: "acumin-pro-extra-condensed"; }
-  :root {
-    font-family: var(--sans-serif); }
-
-b {
-  font-weight: normal; }
-
-@media screen and (min-width: 30em) {
-  font-size: calc(1em + 0.5 * ((100vw - 20em) / 60)); }
-
-@media screen and (min-width: 70em) {
-  font-size: calc(0.8em + 0.5 * ((100vw - 20em) / 60)); }
-
-.sans-serif, .sans-serif-xsmall, .sans-serif-small, .sans-serif-normal, .sans-serif-weight-100, .sans-serif-large, .sans-serif-xxxlarge {
-  font-family: var(--sans-serif); }
-  .sans-serif-xsmall {
-    font-size: 0.8em; }
-  .sans-serif-small {
-    font-size: 0.9em; }
-  .sans-serif-normal {
-    font-size: 1.1em; }
-  .sans-serif-weight-100 {
-    font-weight: 100; }
-  .sans-serif-large {
-    font-size: 2em; }
-  .sans-serif-xxxlarge {
-    font-size: 4em; }
-  .sans-serif-condensed {
-    font-family: var(--sans-serif-condensed); }
-  .sans-serif-xcondensed, .u-NavSite__level--1 a {
-    font-family: var(--sans-serif-xcondensed); }
-
-.u-NavSite__level--1 a {
-  font-size: 1.4em;
-  letter-spacing: 0.04em;
-  text-transform: uppercase; }
-
-.u-NavSite__secondary .u-NavSite__level--3 {
-  font-size: 0.86em; }
-  .u-NavSite__secondary .u-NavSite__level--3 .active {
-    font-weight: bold; }
-
 /*	Basics is for pervasive rules that should apply everywhere. These are more fundamental and generic than helpers - they apply to all layouts. This could be a single page, but I'm setting it up as a folder in case anyone would want to include stuff like reset/normalize stylesheets.
-	
+
 	Couple of ideas here from https://every-layout.dev/
-
-
 */
 html {
-  box-sizing: border-box; }
+  font-size: 1.2em;
+  scroll-behavior: smooth;
+  /*	Sets up a media query. This expects that all of a project's breakpoints will
+  	    be stored in a map named $breakpoints, as follows:
+
+  $breakpoints: (
+  	"small": 30em,
+  	"medium": 50em,
+  	"large": 70em
+  );	
+  	*/
+  /*	Sets up a media query. This expects that all of a project's breakpoints will
+  	    be stored in a map named $breakpoints, as follows:
+
+  $breakpoints: (
+  	"small": 30em,
+  	"medium": 50em,
+  	"large": 70em
+  );	
+  	*/
+}
+@media screen and (min-width: 30em) {
+  html {
+    font-size: calc(1em + 0.5 * ((100vw - 20em) / 60));
+  }
+}
+@media screen and (min-width: 50em) {
+  html {
+    font-size: calc(0.8em + 0.5 * ((100vw - 20em) / 60));
+  }
+}
+
+b {
+  font-weight: unset;
+}
+
+body {
+  margin: 0;
+}
+
+html {
+  box-sizing: border-box;
+}
 
 *, *:before, *:after {
-  box-sizing: inherit; }
+  box-sizing: inherit;
+}
 
-*:only-child {
-  margin-top: 0; }
+* {
+  margin-top: 0;
+}
+
+*:only-child,
+*:first-child {
+  margin-top: 0;
+}
+
+img,
+table {
+  width: 100%;
+}
+
+img {
+  height: auto;
+  display: block;
+  line-height: 0;
+}
+
+/*	Fonts
+	=====
+
+	Store all references to locally hosted webfonts here.
+
+	Note that fonts declared in an @import - like Typekit stuff - are in _config, since @import statements need to be the first item in the generated CSS.
+*/
+html {
+  font-size: 1.2em;
+  /*	Sets up a media query. This expects that all of a project's breakpoints will
+  	    be stored in a map named $breakpoints, as follows:
+
+  $breakpoints: (
+  	"small": 30em,
+  	"medium": 50em,
+  	"large": 70em
+  );	
+  	*/
+  /*	Sets up a media query. This expects that all of a project's breakpoints will
+  	    be stored in a map named $breakpoints, as follows:
+
+  $breakpoints: (
+  	"small": 30em,
+  	"medium": 50em,
+  	"large": 70em
+  );	
+  	*/
+}
+@media screen and (min-width: 50em) {
+  html {
+    font-size: calc(1em + 0.5 * ((100vw - 20em) / 60));
+  }
+}
+@media screen and (min-width: 70em) {
+  html {
+    font-size: calc(0.8em + 0.5 * ((100vw - 20em) / 60));
+  }
+}
+
+/*	Annotation
+*/
+.annotation p {
+  font-family: var(--sansSerif, SpaceGrotesk-Regular, system-ui);
+  letter-spacing: -0.012em;
+  line-height: 1.25;
+  font-size: 0.9em;
+}
+@media screen and (min-width: 30em) {
+  .annotation p {
+    font-size: 0.8em;
+  }
+}
+@media screen and (min-width: 50em) {
+  .annotation p {
+    font-size: 0.7em;
+  }
+}
+
+h1 {
+  font-family: var(--condensedHeader, Morganite, CenturyCondBook, Ballastv01-CondensedBold);
+  line-height: 0.9;
+  font-size: 6em;
+  font-weight: normal;
+}
+h1 .subtitle {
+  font-family: SpaceMono-Regular;
+}
+p {
+  font-family: IBMPlexSerif, Calendas-Plus, LibertinusSerif-Regular, Times;
+  line-height: 1.5;
+  font-size: 1em;
+  -webkit-text-stroke: 0.012em #fff;
+}
+@media screen and (min-width: 30em) {
+  p {
+    font-size: 1em;
+  }
+}
+li, li p {
+  font-family: IBMPlexSerif, Calendas-Plus, LibertinusSerif-Regular, Times;
+  line-height: 1;
+  font-size: 1em;
+}
+@media screen and (min-width: 30em) {
+  li, li p {
+    line-height: 1.2;
+    font-size: 1em;
+  }
+}
+.single .post__date {
+  font-family: SpaceMono-Regular;
+  font-size: 0.9em;
+}
+.single .post__categories a,
+.single .post__tags a {
+  font-family: SpaceMono-Regular;
+  font-size: 0.7em;
+}
+.intro {
+  font-family: IBMPlexSerif, Calendas-Plus, LibertinusSerif-Regular, Times;
+  line-height: 1;
+  font-size: 1.2em;
+}
+@media screen and (min-width: 30em) {
+  .intro {
+    line-height: 1.2;
+    font-size: 1.6em;
+  }
+}
+figcaption {
+  font-family: var(--sansSerif, SpaceGrotesk-Regular, system-ui);
+  letter-spacing: -0.012em;
+  line-height: 1.25;
+  font-size: 0.8em;
+}
+.home .post .entry__summary p {
+  font-family: IBMPlexSerif-LightItalic;
+  line-height: 1;
+  font-size: 1.1em;
+}
+@media screen and (min-width: 30em) {
+  .home .post .entry__summary p {
+    line-height: 1.2;
+    font-size: 1.2em;
+  }
+}
+.home .post .post__title {
+  font-family: var(--condensedHeader, Morganite, CenturyCondBook, Ballastv01-CondensedBold);
+  line-height: 0.9;
+  font-size: 6em;
+  font-weight: normal;
+}
+.home .post .label,
+.home .post .post__date {
+  font-family: SpaceMono-Regular;
+  font-size: 0.6em;
+}
+.home .post .post__categories a,
+.home .post .post__tags a {
+  font-family: SpaceMono-Regular;
+  font-size: 0.6em;
+}
+.archive .post__title {
+  font-family: SpaceMono-Regular;
+  letter-spacing: -0.03em;
+  font-weight: bold;
+  font-size: 1.4em;
+}
+.archive .post__date {
+  font-family: SpaceMono-Regular;
+  font-size: 0.6em;
+}
+.archive .entry__summary p {
+  font-family: IBMPlexSerif, Calendas-Plus, LibertinusSerif-Regular, Times;
+  line-height: 1.4;
+  font-size: 0.8em;
+}
+/*	Post meta
+*/
+.meta {
+  font-family: var(--sansSerif, SpaceGrotesk-Regular, system-ui);
+  letter-spacing: -0.012em;
+  line-height: 1.3;
+  font-size: 0.8em;
+}
+.prevnext__title {
+  font-family: SpaceMono-Regular;
+  font-size: 0.9em;
+  text-transform: uppercase;
+}
+.prevnext__name {
+  font-family: var(--condensedHeader, Morganite, CenturyCondBook, Ballastv01-CondensedBold);
+  line-height: 0.9;
+  font-size: 4em;
+}
+.place-left {
+  float: left;
+  padding: 0 1.3em 1.3em 0;
+}
+
+.place-right {
+  float: right;
+  padding: 0 1.3em 0 1.3em;
+}
 
 .margin-0 {
-  margin: 0; }
+  margin: 0;
+}
 
+.padding-normal {
+  padding: 1em;
+}
+
+.padding-large {
+  padding: 1.2em;
+}
+
+@media screen and (min-width: 50em) {
+  .padding-large {
+    padding: 1.4em;
+  }
+}
 .breakout,
 .width-fullscreen {
   left: 50%;
@@ -75,139 +347,876 @@ html {
   max-width: none;
   right: 50%;
   position: relative;
-  width: 100vw; }
+  width: 100vw;
+}
+
+.width-full-screen,
+.size-full.width-full-screen {
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+  width: 100vw !important;
+  transform: translateX(calc(50vw - 50%));
+  max-width: 100vw;
+  /*		width: 100vw;
+  		position: relative;
+  		left: 50%;
+  		right: 50%;
+  		margin-left: -50vw;
+  		margin-right: -50vw;
+  		max-width: none;	*/
+  width: 100vw !important;
+}
+
+.width-quarter, .wp-block-image.size-thumbnail {
+  width: 33%;
+}
+
+@media screen and (min-width: 50em) {
+  .width-quarter, .wp-block-image.size-thumbnail {
+    width: 25%;
+  }
+}
+.width-third, .wp-block-image.size-medium {
+  width: 50%;
+}
+
+@media screen and (min-width: 50em) {
+  .width-third, .wp-block-image.size-medium {
+    width: 40%;
+  }
+}
+.width-half, .wp-block-image.size-large {
+  width: 100%;
+}
+
+@media screen and (min-width: 50em) {
+  .width-half, .wp-block-image.size-large {
+    width: 52%;
+  }
+}
+.width-full, .wp-block-image.size-full {
+  width: 100%;
+}
+
+.width-wide {
+  clear: both;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+  width: 50em !important;
+  transform: translateX(calc(50vw - 50%));
+  max-width: 100vw;
+  /*		width: 100vw;
+  		position: relative;
+  		left: 50%;
+  		right: 50%;
+  		margin-left: -50vw;
+  		margin-right: -50vw;
+  		max-width: none;	*/
+}
+
+.width-xwide {
+  clear: both;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+  width: 60em !important;
+  transform: translateX(calc(50vw - 50%));
+  max-width: 100vw;
+  /*		width: 100vw;
+  		position: relative;
+  		left: 50%;
+  		right: 50%;
+  		margin-left: -50vw;
+  		margin-right: -50vw;
+  		max-width: none;	*/
+}
+
+.ac-hiddenVisually, .ac-NavAnchor, .post .label {
+  display: none;
+}
 
 /* */
+._clean-list, .home .post .post__categories,
+.home .post .post__tags {
+  padding-left: 0;
+}
+._clean-list > li, .home .post .post__categories > li,
+.home .post .post__tags > li {
+  list-style: none;
+}
+
+._clean-list--horizontal, .single .post__categories,
+.single .post__tags {
+  padding-left: 0;
+}
+._clean-list--horizontal > li, .single .post__categories > li,
+.single .post__tags > li {
+  list-style: none;
+  display: inline;
+  margin-left: var(--clean-list-horizontal-itemSpace, 0.8em);
+}
+._clean-list--horizontal > li:first-child, .single .post__categories > li:first-child,
+.single .post__tags > li:first-child {
+  margin-left: 0;
+}
+
+.archive .post {
+  display: flex;
+  flex-flow: column;
+  border-bottom: 1px dashed #00f;
+  padding-bottom: 2em;
+  margin-bottom: 2em;
+}
+.archive .post__catContainer,
+.archive .post__tagsContainer {
+  display: none;
+}
+.archive .post__header {
+  order: 2;
+}
+.archive .post__dateContainer {
+  order: 1;
+}
+.archive .entry__summary {
+  order: 3;
+}
+.archive .entry__summary p {
+  margin-bottom: 0;
+}
+
+.sticky {
+  display: block !important;
+  text-align: center;
+  max-width: 30em;
+  margin: 0 auto 6em auto !important;
+}
+.sticky .post__header {
+  display: none;
+}
+.sticky > b {
+  display: none;
+}
+.sticky p {
+  font-family: IBMPlexSerif-Light !important;
+  font-size: 0.9em !important;
+}
+
+.single .post__title {
+  margin-bottom: 0.4em;
+}
+.single .post {
+  display: grid;
+  grid-template-rows: auto 1fr auto auto;
+  grid-template-columns: auto 1fr;
+  grid-template-areas: "post-date post-date" "post-title post-title" "post-categories post-tags" "post-content post-content";
+  grid-column-gap: 3em;
+  margin-bottom: 3em;
+}
+.single .post__dateContainer {
+  grid-area: post-date;
+  margin-bottom: 1em;
+}
+.single .post__header {
+  grid-area: post-title;
+}
+.single .post__catContainer {
+  grid-area: post-categories;
+}
+.single .post__tagsContainer {
+  grid-area: post-tags;
+}
+.single .entry__content {
+  grid-area: post-content;
+}
+.single .post__categories,
+.single .post__tags {
+  text-align: right;
+}
+
+figure {
+  margin-top: 2em;
+  margin-bottom: 2em;
+}
+
+.home .post__edit {
+  display: none;
+}
+.home .post {
+  /*	Sets up a media query. This expects that all of a project's breakpoints will
+  	    be stored in a map named $breakpoints, as follows:
+
+  $breakpoints: (
+  	"small": 30em,
+  	"medium": 50em,
+  	"large": 70em
+  );	
+  	*/
+}
+@media screen and (min-width: 30em) {
+  .home .post {
+    display: grid;
+    /*
+    grid-template-rows: auto 1fr;
+    grid-template-columns: auto 1fr;
+    grid-template-areas: 
+    	"post-meta post-title"
+    	"post-meta post-content"
+    ;
+    */
+    grid-template-rows: auto 1fr auto;
+    grid-template-columns: auto 1fr;
+    grid-template-areas: "post-date post-title" "post-category post-title" "post-tags post-content";
+    grid-column-gap: 3em;
+    margin-bottom: 3em;
+  }
+}
+.home .post .post__title {
+  margin-bottom: 0.2em;
+}
+.home .post .post__date {
+  grid-area: post-date;
+}
+.home .post .post__catContainer {
+  grid-area: post-category;
+}
+.home .post .post__tagsContainer {
+  grid-area: post-tags;
+}
+.home .post .post__header {
+  grid-area: post-title;
+}
+.home .post .post__meta {
+  grid-area: post-meta;
+}
+.home .post .entry__summary {
+  grid-area: post-content;
+}
+.postNav__container {
+  text-align: center;
+  /*	Sets up a media query. This expects that all of a project's breakpoints will
+  	    be stored in a map named $breakpoints, as follows:
+
+  $breakpoints: (
+  	"small": 30em,
+  	"medium": 50em,
+  	"large": 70em
+  );	
+  	*/
+}
+.postNav__container .pagingNav__navItem b {
+  display: block;
+}
+@media screen and (min-width: 50em) {
+  .postNav__container {
+    display: flex;
+    flex-direction: row;
+    text-align: unset;
+  }
+  .postNav__container .pagingNav__navItem {
+    width: 50%;
+  }
+  .postNav__container .postNav__next {
+    text-align: right;
+  }
+}
+
 .cols-3-lg {
   grid-template-columns: 1fr 1fr 1fr;
-  grid-gap: 2em; }
+  grid-gap: 2em;
+}
 
 .grid {
-  display: grid; }
-
-.u-pageInner .PageContentInner {
   display: grid;
-  grid-template-columns: 25% 75%;
-  grid-template-rows: auto auto auto;
-  grid-template-areas: "masthead nav-top" "nav-secondary content" "footer footer"; }
+}
 
-.u-pageInner .u-lHeader {
-  align-items: center;
-  display: flex;
-  grid-area: masthead;
-  justify-content: center;
-  justify-content: left;
-  padding-left: 1.8em; }
+html {
+  padding: 0.4em;
+}
 
-.u-pageInner .u-lContent {
-  max-width: 34em; }
+body {
+  padding-top: 6em;
+}
 
-.u-pageInner .u-NavSite__main {
-  grid-area: nav-top;
-  line-height: 1.4;
-  padding-right: 1.4em;
-  text-align: right; }
+.u-lPageContent {
+  padding: 2em 2em 6em 2em;
+}
 
-.u-pageInner .u-NavSite__level--1 {
-  float: right;
-  width: 70%; }
+.u-NavSite {
+  position: absolute;
+  top: 2em;
+  right: 2em;
+}
+.u-NavSite li {
+  display: inline;
+}
+.u-NavSite .icon {
+  display: none;
+}
 
-.u-pageInner .u-NavSite__secondary {
-  grid-area: nav-secondary; }
-  .u-pageInner .u-NavSite__secondary .u-NavSite__level--2 {
-    margin: 5em 4em 0 0;
-    padding: 0; }
-  .u-pageInner .u-NavSite__secondary li {
-    list-style: none;
-    margin: 0;
-    padding: 0; }
-    .u-pageInner .u-NavSite__secondary li a {
-      text-decoration: none;
-      padding-left: 1.4em; }
+.u-lPageContent {
+  margin: 0 auto;
+  max-width: 40em;
+}
 
-.u-pageInner .u-lMain {
-  grid-area: content; }
+.home {
+  margin-top: 0 !important;
+}
+.home .u-lPageContent {
+  max-width: 48em;
+}
 
-.u-pageInner .u-lFooter {
-  grid-area: footer; }
+.post__categories a {
+  text-decoration: none;
+  padding: 0.1em 0.6em;
+  border-radius: 0.4em;
+}
+.post__categories a[href$="uncategorized/"] {
+  background: #f00;
+}
+.post__categories a[href$="design/"] {
+  background: #F6EE75;
+}
 
+/*
+
+#B9E486
+
+#B1D9FB
+
+#F6EE75
+
+#E5B5F8
+
+#F9DCA9
+
+#D9D8FD
+
+*/
 /*	This file doesn't do anything except bind variables to specific elements on the page. The actual colors are set in the palette files.
 
 */
 html {
-  color: var(--site-text-color); }
-  html.home {
-    background: var(--home-bg, var(--site-bg));
-    border-top: var(--home-top-border, var(--site-top-border)); }
-  html h1 {
-    color: var(--site-masthead-color);
-    -webkit-text-stroke: var(--site-masthead-textstroke); }
-  html .button {
-    transition: 0.4s all ease; }
-    html .button {
-      background: var(--mod-button-link-bg, var(--link-bg));
-      color: var(--mod-button-link-color, var(--link)); }
-      html .button:hover, html .button:visited:hover {
-        background: var(--mod-button-link-bg-hover, var(--link-bg-hover));
-        color: var(--mod-button-link-color-hover, var(--link-hover));
-        text-shadow: var(--mod-button-link-glow); }
-  html a {
-    color: var(--link);
-    transition: 0.4s all ease; }
-    html a:hover, html a:hover:visited {
-      color: var(--link-hover); }
-  html .u-lHeader h1 {
-    color: var(--masthead-color); }
-  html .u-NavSite__main a {
-    text-decoration: none; }
-    html .u-NavSite__main a {
-      background: var(--site-nav-link-bg, var(--link-bg));
-      color: var(--site-nav-link-color, var(--link)); }
-      html .u-NavSite__main a:hover, html .u-NavSite__main a:visited:hover {
-        background: var(--site-nav-link-bg-hover, var(--link-bg-hover));
-        color: var(--site-nav-link-color-hover, var(--link-hover));
-        text-shadow: var(--site-nav-link-glow); }
-  html .schedule__item .module__title a {
-    background: var(--sched-item-title-link-bg, var(--link-bg));
-    color: var(--sched-item-title-link-color, var(--link)); }
-    html .schedule__item .module__title a:hover, html .schedule__item .module__title a:visited:hover {
-      background: var(--sched-item-title-link-bg-hover, var(--link-bg-hover));
-      color: var(--sched-item-title-link-color-hover, var(--link-hover));
-      text-shadow: var(--sched-item-title-link-glow); }
-  html .schedule__item.mainstage {
-    background: var(--sched-mainstage-bg); }
-  html .schedule__item.workshops {
-    background: var(--sched-workshops-bg); }
-  html .row--facts {
-    background: var(--row-facts-bg);
-    color: var(--row-facts-color); }
-    html .row--facts .row__title {
-      color: var(--row-facts-title-color, var(--row-facts-color)); }
-  html .row--schedule {
-    background: var(--row-schedule-bg);
-    color: var(--row-schedule-color); }
-    html .row--schedule .row__title {
-      color: var(--row-schedule-title-color, var(--row-schedule-color)); }
-    html .row--schedule .module__title {
-      color: var(--row-schedule-modtitle-color, var(--row-schedule-title-color)); }
-  html .row--people {
-    background: var(--row-people-bg);
-    color: var(--row-people-color); }
-    html .row--people .row__title {
-      color: var(--row-people-title-color, var(--row-people-color)); }
-  html .u-lFooter {
-    background: var(--footer-bg);
-    color: var(--footer-color); }
-    html .u-lFooter {
-      background: var(--footer-link-bg, var(--link-bg));
-      color: var(--footer-link-color, var(--link)); }
-      html .u-lFooter:hover, html .u-lFooter:visited:hover {
-        background: var(--footer-link-bg-hover, var(--link-bg-hover));
-        color: var(--footer-link-color-hover, var(--link-hover));
-        text-shadow: var(--footer-link-glow); }
-  html .u-NavSite__secondary .u-NavSite__level--2 > .active > a {
-    background: var(--subnav-active-bg, #000);
-    color: var(--subnav-active-color, #fff); }
-  html .u-NavSite__secondary .u-NavSite__level--3 > .active > a {
-    background: var(--subsubnav-active-bg, #000);
-    color: var(--subsubnav-active-color, #fff); }
+  color: var(--site-text-color);
+}
+html.home {
+  border-top: var(--home-top-border, var(--site-top-border));
+}
+html h1 {
+  color: var(--site-masthead-color);
+  -webkit-text-stroke: var(--site-masthead-textstroke);
+}
+html .button {
+  transition: 0.4s all ease;
+}
+html .button {
+  background: var(--mod-button-link-bg, var(--link-bg));
+  color: var(--mod-button-link-color, var(--link));
+}
+html .button:hover, html .button:visited:hover {
+  background: var(--mod-button-link-bg-hover, var(--link-bg-hover));
+  color: var(--mod-button-link-color-hover, var(--link-hover));
+  text-shadow: var(--mod-button-link-glow);
+}
+html a {
+  color: var(--link);
+  transition: 0.4s all ease;
+}
+html a:hover, html a:hover:visited {
+  color: var(--link-hover);
+}
+html .u-lHeader h1 {
+  color: var(--masthead-color);
+}
+html .u-NavSite__main a {
+  text-decoration: none;
+}
+html .u-NavSite__main a {
+  background: var(--site-nav-link-bg, var(--link-bg));
+  color: var(--site-nav-link-color, var(--link));
+}
+html .u-NavSite__main a:hover, html .u-NavSite__main a:visited:hover {
+  background: var(--site-nav-link-bg-hover, var(--link-bg-hover));
+  color: var(--site-nav-link-color-hover, var(--link-hover));
+  text-shadow: var(--site-nav-link-glow);
+}
+html .schedule__item .module__title a {
+  background: var(--sched-item-title-link-bg, var(--link-bg));
+  color: var(--sched-item-title-link-color, var(--link));
+}
+html .schedule__item .module__title a:hover, html .schedule__item .module__title a:visited:hover {
+  background: var(--sched-item-title-link-bg-hover, var(--link-bg-hover));
+  color: var(--sched-item-title-link-color-hover, var(--link-hover));
+  text-shadow: var(--sched-item-title-link-glow);
+}
+html .schedule__item.mainstage {
+  background: var(--sched-mainstage-bg);
+}
+html .schedule__item.workshops {
+  background: var(--sched-workshops-bg);
+}
+html .row--facts {
+  background: var(--row-facts-bg);
+  color: var(--row-facts-color);
+}
+html .row--facts .row__title {
+  color: var(--row-facts-title-color, var(--row-facts-color));
+}
+html .row--schedule {
+  background: var(--row-schedule-bg);
+  color: var(--row-schedule-color);
+}
+html .row--schedule .row__title {
+  color: var(--row-schedule-title-color, var(--row-schedule-color));
+}
+html .row--schedule .module__title {
+  color: var(--row-schedule-modtitle-color, var(--row-schedule-title-color));
+}
+html .row--people {
+  background: var(--row-people-bg);
+  color: var(--row-people-color);
+}
+html .row--people .row__title {
+  color: var(--row-people-title-color, var(--row-people-color));
+}
+html .u-lFooter {
+  background: var(--footer-bg);
+  color: var(--footer-color);
+}
+html .u-lFooter {
+  background: var(--footer-link-bg, var(--link-bg));
+  color: var(--footer-link-color, var(--link));
+}
+html .u-lFooter:hover, html .u-lFooter:visited:hover {
+  background: var(--footer-link-bg-hover, var(--link-bg-hover));
+  color: var(--footer-link-color-hover, var(--link-hover));
+  text-shadow: var(--footer-link-glow);
+}
+html .u-NavSite__secondary .u-NavSite__level--2 > .active > a {
+  background: var(--subnav-active-bg, #000);
+  color: var(--subnav-active-color, #fff);
+}
+html .u-NavSite__secondary .u-NavSite__level--3 > .active > a {
+  background: var(--subsubnav-active-bg, #000);
+  color: var(--subsubnav-active-color, #fff);
+}
+
+.home .post .post__titleLink {
+  text-decoration: none;
+}
+
+.u-Masthead {
+  background: radial-gradient(ellipse at center, #00f 0%, #00f 10%, #f00 10%, #f00 20%, #0f0 20%, #0f0 30%, #00f 30%, #00f 40%, #f00 40%, #f00 50%, #0f0 50%, #0f0 60%, #00f 60%, #00f 70%, #f00 70%, #f00 80%);
+  background-size: var(--hp-badge-bg-size, 100%) var(--hp-badge-bg-size, 100%);
+  background-position: center center;
+  filter: hue-rotate(var(--hue-rotate));
+}
+
+.u-lHeader {
+  height: 3em;
+  position: fixed;
+  top: 2em;
+  left: 2em;
+  width: 3em;
+}
+
+@keyframes spin {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+@keyframes spin-cc {
+  100% {
+    transform: rotate(-720deg);
+  }
+}
+.u-Masthead__siteTitle {
+  margin: 0;
+}
+
+.u-lHeader:hover a {
+  z-index: 1000;
+  width: 8em;
+}
+.u-lHeader:hover a:hover .u-Masthead__siteTitle__text {
+  animation: spin-cc 4s linear infinite;
+}
+
+.u-Masthead__siteTitle__text {
+  position: relative;
+  display: block;
+}
+
+.u-Masthead {
+  display: block;
+  height: 2em;
+  width: 2em;
+  border-radius: 50%;
+}
+
+.s1 {
+  position: relative;
+}
+.s1, .s1:before, .s1:after {
+  transition: all ease 0.4s;
+}
+.u-lHeader:hover .s1 {
+  animation: spin 4s linear infinite;
+  position: relative;
+  background: radial-gradient(ellipse at center, transparent 0%, transparent 23%, #0f0 23%, #0f0 26%, transparent 26%, transparent 46%, #0f0 46%, #0f0 49%, transparent 49%, transparent 100%), conic-gradient(#0f0, #000, #000);
+  background-size: contain;
+}
+
+.u-lHeader:hover .s2 {
+  animation: spin 4s linear infinite;
+  background: conic-gradient( #0ff 0deg 22.5deg,  transparent 22.5deg 45deg,  #0ff 45deg 67.5deg,  transparent 67.5deg 90deg,  #0ff 90deg 112.5deg,  transparent 112.5deg 135deg,  #0ff 135deg 157.5deg,  transparent 157.5deg 180deg,  #0ff 180deg 202.5deg,  transparent 202.5deg 225deg,  #0ff 225deg 247.5deg,  transparent 247.5deg 270deg,  #0ff 270deg 292.5deg,  transparent 292.5deg 315deg,  #0ff 315deg 337.5deg,  transparent 337.5deg 360deg,  #0ff 360deg );
+}
+.u-lHeader:hover .s2:before {
+  mix-blend-mode: multiply;
+  animation: spin-cc 4s linear infinite;
+  position: absolute;
+  content: "";
+  width: 100%;
+  height: 100%;
+  background: #f00;
+  border-radius: 50%;
+  top: calc((100% - 100%) / 2);
+  left: calc((100% - 100%) / 2);
+  background: conic-gradient( #f00 0deg 22.5deg,  transparent 22.5deg 45deg,  #f00 45deg 67.5deg,  transparent 67.5deg 90deg,  #f00 90deg 112.5deg,  transparent 112.5deg 135deg,  #f00 135deg 157.5deg,  transparent 157.5deg 180deg,  #f00 180deg 202.5deg,  transparent 202.5deg 225deg,  #f00 225deg 247.5deg,  transparent 247.5deg 270deg,  #f00 270deg 292.5deg,  transparent 292.5deg 315deg,  #f00 315deg 337.5deg,  transparent 337.5deg 360deg,  #f00 360deg );
+}
+
+.u-lHeader:hover .s3 {
+  background: conic-gradient( #00f,  #fff,  #00f,  #fff,  #00f,  #fff,  #00f,  #fff,  #00f,  #fff,  #00f,  #fff,  #00f,  #fff,  #00f,  #fff, #00f);
+}
+.u-lHeader:hover .s3:before {
+  position: absolute;
+  content: "";
+  width: 66%;
+  height: 66%;
+  background: #f00;
+  border-radius: 50%;
+  top: calc((100% - 66%) / 2);
+  left: calc((100% - 66%) / 2);
+  background: conic-gradient( #00f,  #fff,  #00f,  #fff,  #00f,  #fff,  #00f,  #fff,  #00f,  #fff,  #00f,  #fff,  #00f,  #fff,  #00f,  #fff, #00f);
+}
+.u-lHeader:hover .s3:after {
+  position: absolute;
+  content: "";
+  width: 33%;
+  height: 33%;
+  background: #f00;
+  border-radius: 50%;
+  top: calc((100% - 33%) / 2);
+  left: calc((100% - 33%) / 2);
+  background: conic-gradient( #00f,  #fff,  #00f,  #fff,  #00f,  #fff,  #00f,  #fff,  #00f,  #fff,  #00f,  #fff,  #00f,  #fff,  #00f,  #fff, #00f);
+}
+.u-lHeader:hover .s3, .u-lHeader:hover .s3:after {
+  animation: spin 4s linear infinite;
+}
+.u-lHeader:hover .s3:before {
+  animation: spin-cc 4s linear infinite;
+}
+
+.u-lHeader:hover .s4 {
+  background: conic-gradient( #f00 0deg 72deg,  #ff0 72deg 144deg,  #0f0 144deg 216deg,  #0ff 216deg 288deg,  #00f 288deg 360deg,  #f0f 360deg, #f00);
+}
+.u-lHeader:hover .s4:before {
+  position: absolute;
+  content: "";
+  width: 66%;
+  height: 66%;
+  background: #f00;
+  border-radius: 50%;
+  top: calc((100% - 66%) / 2);
+  left: calc((100% - 66%) / 2);
+  background: conic-gradient( #f00 0deg 72deg,  #ff0 72deg 144deg,  #0f0 144deg 216deg,  #0ff 216deg 288deg,  #00f 288deg 360deg,  #f0f 360deg, #f00);
+}
+.u-lHeader:hover .s4:after {
+  position: absolute;
+  content: "";
+  width: 33%;
+  height: 33%;
+  background: #f00;
+  border-radius: 50%;
+  top: calc((100% - 33%) / 2);
+  left: calc((100% - 33%) / 2);
+  background: conic-gradient( #f00 0deg 72deg,  #ff0 72deg 144deg,  #0f0 144deg 216deg,  #0ff 216deg 288deg,  #00f 288deg 360deg,  #f0f 360deg, #f00);
+}
+.u-lHeader:hover .s4, .u-lHeader:hover .s4:after {
+  animation: spin 4s linear infinite;
+}
+.u-lHeader:hover .s4:before {
+  animation: spin-cc 4s linear infinite;
+}
+
+.s5, .s5:before, .s5:after {
+  transition: all ease 0.4s;
+}
+.u-lHeader:hover .s5 {
+  background: #f00 !important;
+  width: calc(0.3 * 4em);
+}
+.u-lHeader:hover .s5:before, .u-lHeader:hover .s5:after {
+  position: absolute;
+  content: "";
+  height: 100%;
+  width: 100%;
+  background: #f00;
+  border-radius: 50%;
+  background: #0f0;
+  transform: rotate(120deg);
+  mix-blend-mode: color-dodge;
+  top: 0;
+  left: 0;
+}
+.u-lHeader:hover .s5:after {
+  background: #00f;
+  transform: rotate(240deg);
+}
+.u-lHeader:hover .s5 {
+  animation: spin 4s linear infinite;
+}
+.u-lHeader:hover .s5:before {
+  animation: spin-cc 4s linear infinite;
+}
+
+.u-lHeader:hover .s6 {
+  animation: spin 8s linear infinite;
+  background: conic-gradient( #f0f,  #0ff,  #f0f,  #0ff,  #f0f,  #0ff,  #f0f,  #0ff,  #f0f,  #0ff,  #f0f,  #0ff,  #f0f,  #0ff,  #f0f,  #0ff, #f0f);
+}
+.u-lHeader:hover .s6:before {
+  mix-blend-mode: multiply;
+  animation: spin-cc 4s linear infinite;
+  position: absolute;
+  content: "";
+  width: 100%;
+  height: 100%;
+  background: #f00;
+  border-radius: 50%;
+  top: calc((100% - 100%) / 2);
+  left: calc((100% - 100%) / 2);
+  background: conic-gradient( #0ff,  #f0f,  #0ff,  #f0f,  #0ff,  #f0f,  #0ff,  #f0f,  #0ff,  #f0f,  #0ff,  #f0f,  #0ff,  #f0f,  #0ff,  #f0f, #0ff);
+}
+.u-lHeader:hover .s6:after {
+  mix-blend-mode: color-dodge;
+  animation: spin 8s linear infinite;
+  position: absolute;
+  content: "";
+  width: 100%;
+  height: 100%;
+  background: #f00;
+  border-radius: 50%;
+  top: calc((100% - 100%) / 2);
+  left: calc((100% - 100%) / 2);
+  background: conic-gradient( #ff0,  transparent,  #ff0,  transparent,  #ff0,  transparent,  #ff0,  transparent,  #ff0,  transparent,  #ff0,  transparent,  #ff0,  transparent,  #ff0,  transparent, #ff0);
+}
+
+.post__tags a {
+  text-decoration: none;
+}
+.post__tags a:before {
+  content: "#";
+}
+
+/*	LINK EFFECTS
+
+Effects:
+- wipe up
+- wipe left
+	- invert-text
+
+*/
+:root {
+  --highlight-color: #f00;
+  --highlight-height: 40%;
+  --link-bg: transparent;
+}
+
+.linkMask, .post__tags li a {
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: #f0f;
+}
+
+.entry__summary p {
+  color: #313746;
+}
+
+.post__tags li a {
+  --highlight-color: #000;
+  --highlight-height: 100%;
+  --link-bg: #aaa;
+}
+.post__tags li a:hover {
+  -webkit-text-fill-color: transparent;
+  color: transparent !important;
+}
+
+/*
+	On return:
+	- Turn the background-size and background-position settings into variables
+	- do effects like wipe-up-melt and wipe-up-melt-bounce by adjusting the variables, not
+		the actual CSS.
+
+	The idea is that all these styles would have the same basic code. Effects like wipe-up-melt etc
+	would be accomplished through collections of CSS variables.
+
+	Or: have mixins that you can pass settings to. That might be easier. And the mixin generates the code,
+	which would be easier to deal with/more extensible than having one swiss-army-knife mixin that manages a bunch of
+	different configurations and tries to do everything.
+
+
+	Idea: linkEffect comes with presets that are parameters. so wipe-up-melt would specify certain parameters to achieve that effect; you wouldn't have to set the numbers specifically. However, the numbers would be set via CSS vars, so you could override those values if you wanted to have a manually set effect.
+
+*/
+.post__titleLink {
+  background-color: var(--linkEffect-link-bg-color, transparent);
+  background-repeat: no-repeat, repeat-x;
+  background-position: 0 100%, bottom;
+  background-size: 100% 2%;
+  background-image: linear-gradient(to top, var(--linkEffect-highlight-color, #ff0) 0%, var(--linkEffect-highlight-color, #ff0) var(--linkEffect-highlight-height, 100%), transparent var(--linkEffect-highlight-height, 100%), transparent 100%), linear-gradient(to right, var(--link-bg) 0%, var(--link-bg) 100%);
+  position: relative;
+  width: auto;
+  background-repeat: no-repeat, repeat-x;
+  transition: background 0.4s cubic-bezier(0.785, 0.135, 0.15, 0.86) 0s;
+}
+.post__titleLink:hover {
+  background-size: 100% 100%;
+  background-position: 0 100%, bottom;
+}
+
+.entry__summary a {
+  transition-property: background, text-decoration;
+}
+.entry__summary a {
+  background-color: var(--linkEffect-link-bg-color, transparent);
+  background-repeat: no-repeat, repeat-x;
+  background-position: 0 100%, bottom;
+  background-size: 100% 2%;
+  background-image: linear-gradient(to top, var(--linkEffect-highlight-color, #ff0) 0%, var(--linkEffect-highlight-color, #ff0) var(--linkEffect-highlight-height, 100%), transparent var(--linkEffect-highlight-height, 100%), transparent 100%), linear-gradient(to right, var(--link-bg) 0%, var(--link-bg) 100%);
+  position: relative;
+  width: auto;
+  background-repeat: no-repeat, repeat-x;
+  transition: background 0.4s cubic-bezier(0.785, 0.135, 0.15, 0.86) 0s;
+}
+.entry__summary a:hover {
+  background-size: 100% 100%;
+  background-position: 0 100%, bottom;
+}
+.entry__summary a:hover {
+  text-decoration-color: transparent;
+}
+
+.link--wipeUp--melt {
+  --highlight-color: #5ef1e5;
+}
+.link--wipeUp--melt {
+  background-image: linear-gradient(to top, transparent 0%, transparent 10%, var(--highlight-color) 10%, var(--highlight-color) var(--highlight-height), transparent var(--highlight-height), transparent 100%), linear-gradient(to right, var(--link-bg) 0%, var(--link-bg) 100%);
+  color: #f00;
+  position: relative;
+  width: auto;
+  background-repeat: no-repeat, repeat-x;
+  background-position: 0 100%, bottom;
+  transition: background 0.4s cubic-bezier(0.785, 0.135, 0.15, 0.86) 0s;
+  padding: 0.1% 0px;
+  background-size: 100% 4%;
+}
+.link--wipeUp--melt:hover {
+  background-size: 100% 200%;
+  background-position: 0 100%, bottom;
+}
+
+.link--wipeUp {
+  background-image: linear-gradient(to top, var(--highlight-color) 0%, var(--highlight-color) var(--highlight-height), transparent var(--highlight-height), transparent 100%), linear-gradient(to right, var(--link-bg) 0%, var(--link-bg) 100%);
+  color: #f00;
+  position: relative;
+  width: auto;
+  background-repeat: no-repeat, repeat-x;
+  background-position: 0 100%, bottom;
+  transition: background 0.4s cubic-bezier(0.785, 0.135, 0.15, 0.86) 0s;
+  padding: 0.1% 0px;
+  background-size: 100% 2%;
+}
+.link--wipeUp:hover {
+  background-size: 100% 400%;
+  background-position: 0 100%, bottom;
+}
+
+.link--titleStyle {
+  display: block;
+  background-image: linear-gradient(to top, var(--highlight-color) 0%, var(--highlight-color) var(--highlight-height), transparent var(--highlight-height), transparent 100%), linear-gradient(to right, var(--link-bg) 0%, var(--link-bg) 100%);
+  color: #f00;
+  position: relative;
+  width: auto;
+  background-repeat: no-repeat, repeat-x;
+  background-position: 0 100%, bottom;
+  transition: background 0.4s cubic-bezier(0.785, 0.135, 0.15, 0.86) 0s;
+  padding: 0.1% 0px;
+  background-size: 100% 4%;
+}
+.link--titleStyle:hover {
+  background-size: 100% 400%;
+  background-position: 0 100%, bottom;
+}
+
+.wipeRight,
+.post__tags a {
+  background-image: linear-gradient(to top, var(--highlight-color) 0%, var(--highlight-color) var(--highlight-height), transparent var(--highlight-height), transparent 100%), linear-gradient(to right, var(--link-bg) 0%, var(--link-bg) 100%);
+  color: #f00;
+  position: relative;
+  width: auto;
+  background-repeat: no-repeat, repeat-x;
+  background-position: 0px bottom, center bottom;
+  transition: background 0.4s cubic-bezier(0.785, 0.135, 0.15, 0.86) 0s;
+  padding: 0.1% 0px;
+  background-size: 0px 100%, 100%;
+}
+.wipeRight:hover,
+.post__tags a:hover {
+  background-size: 100% 1px;
+  background-size: 100% 100%, 100%;
+}
+
+html {
+  background-image: var(--bg);
+  background-position: 0 0;
+  background-attachment: fixed;
+  background-size: contain !important;
+}
+html body {
+  background: #fff;
+  border-radius: 2.3em;
+}
+
+.u-Masthead {
+  background: #f00;
+  text-indent: 3em;
+  border-radius: 50%;
+  position: fixed;
+  width: 2em;
+  height: 2em;
+  display: block;
+}
+.u-Masthead .u-Masthead__siteTitle {
+  font-size: 1em;
+}
+.u-Masthead .u-Masthead__siteTitle__text {
+  font-family: SpaceMono-Regular;
+}
+.u-Masthead a {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  text-decoration: none;
+}
+
+#wpadminbar {
+  opacity: 0;
+}
+#wpadminbar:hover {
+  opacity: 1;
+}
+
+html.logged-in {
+  margin-top: 0 !important;
+}

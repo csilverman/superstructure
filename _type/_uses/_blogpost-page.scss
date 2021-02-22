@@ -1,0 +1,11 @@
+.single {
+	.post__date {
+		@include font(monospace, small);
+	}
+	.post__categories,
+	.post__tags {
+		a {
+			@include font(monospace, xsmall);
+		}
+	}
+}

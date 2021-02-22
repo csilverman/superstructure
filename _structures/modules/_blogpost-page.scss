@@ -1,0 +1,41 @@
+.single {
+	.post__title {
+		margin-bottom: 0.4em;
+	}
+	.post {
+		display: grid;
+		grid-template-rows: auto 1fr auto auto;
+		grid-template-columns: auto 1fr;
+		grid-template-areas:
+			"post-date post-date"
+			"post-title post-title"
+			"post-categories post-tags"
+			"post-content post-content";
+		grid-column-gap: 3em;
+		margin-bottom: 3em;
+	}
+	.post__dateContainer {
+		grid-area: post-date;
+		margin-bottom: 1em;
+	}
+	.post__header {
+		grid-area: post-title;
+	}
+	.post__catContainer {
+		grid-area: post-categories;
+	}
+	.post__tagsContainer {
+		grid-area: post-tags;
+	}
+	.entry__content {
+		grid-area: post-content;
+	}
+	.post__categories,
+	.post__tags {
+		@extend ._clean-list--horizontal;
+		text-align: right;
+	}
+}
+
+
+

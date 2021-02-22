@@ -1,7 +1,20 @@
 @import "_config";
 @import "~beltpack";
+// @import "~bk-elements";
 @import "_tools/_all";
 @import "_basics/_all";
-@import "_type/_all";
+@import "_type/_type";
 @import "_structures/_all";
 @import "_themes/_all";
+
+
+#wpadminbar {
+	opacity: 0;
+	
+	&:hover {
+		opacity: 1;
+	}
+}
+html.logged-in {
+	margin-top: 0 !important;
+}
